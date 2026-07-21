@@ -78,8 +78,12 @@ impl Multiplexer {
                     while let Some((_, tx)) = pending.pop_front() {
                         let _ = tx.send(Err(MiniDSPError::TransportClosed));
                     }
+                    
+                    log::error!("Transport died. Force exiting to allow systemd to restart the service.");
+                    std::process::exit(1);
                 } else {
                     log::warn!("recv loop exited without an error");
+                    std::process::exit(1);
                 }
                 let mut tx = receiver_tx.lock().unwrap();
                 // Set `receiver_tx` to None to mark this as closed
