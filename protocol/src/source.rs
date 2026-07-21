@@ -59,6 +59,7 @@ impl Source {
                 (Usb, 3),
                 (Bluetooth, 4),
             ],
+            31 => &[(Toslink, 1), (Spdif, 2), (Usb, 3), (Hdmi, 4)],
             32 => &[(Analog, 0), (Toslink, 1), (Spdif, 2), (Usb, 3), (Hdmi, 4)],
             _ => &[(NotInstalled, 0)],
         }
