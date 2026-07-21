@@ -150,7 +150,7 @@ async fn get_master_status(req: Request<Body>) -> Result<Response<Body>, Error> 
                 if query_levels.is_some() {
                     // Use a single shared device instance in order to avoid multiple level queries from being done simultaneously
                     let levels_device = Arc::new(tokio::sync::Mutex::new(device));
-                    IntervalStream::new(tokio::time::interval(Duration::from_millis(500)))
+                    IntervalStream::new(tokio::time::interval(Duration::from_millis(250)))
                         .filter_map(move |_| {
                             let device = levels_device.clone();
                             async move {
