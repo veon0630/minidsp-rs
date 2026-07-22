@@ -124,6 +124,7 @@ jobs:
       - name: Create release with artifacts
         run: |
           set -x
+          shopt -s nullglob
           assets=()
           for asset in ./artifacts/*/*.{tar.gz,zip,deb}; do
             assets+=("$asset")
