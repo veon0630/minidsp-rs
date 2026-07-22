@@ -17,13 +17,6 @@ jobs:
       fail-fast: false
       matrix:
         pair:
-          - target: x86_64-unknown-linux-gnu
-            os: ubuntu-latest
-            bin: minidsp
-            svc_bin: minidspd
-            cross: false
-            archive: tar.gz
-            command: cargo
           - target: aarch64-unknown-linux-gnu
             os: ubuntu-latest
             bin: minidsp
@@ -31,27 +24,6 @@ jobs:
             cross: true
             archive: tar.gz
             command: cross
-          - target: x86_64-apple-darwin
-            os: macos-13
-            bin: minidsp
-            svc_bin: minidspd
-            cross: false
-            archive: tar.gz
-            command: cargo
-          - target: x86_64-pc-windows-msvc
-            os: windows-latest
-            bin: minidsp.exe
-            svc_bin: minidspd.exe
-            cross: false
-            archive: zip
-            command: cargo
-          - target: aarch64-apple-darwin
-            os: macos-latest
-            bin: minidsp
-            svc_bin: minidspd
-            cross: false
-            archive: tar.gz
-            command: cargo
 
     runs-on: ${{ matrix.pair.os }}
     env:
