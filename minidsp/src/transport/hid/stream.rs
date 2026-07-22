@@ -106,8 +106,10 @@ impl HidStream {
                     }
                     Err(e) => {
                         // device error
-                        log::error!("error in hid receive loop: {e:?}");
-                        tx.unbounded_send(Err(e))?;
+                        log::error!("error in hid receive loop: {e:?}, terminating stream");
+                        let _ = tx.unbounded_send(Err(e));
+                        // The device handle is dead. Exit the loop to prevent 100% CPU spin and OOM from unbound channel
+                        return Ok::<(), futures::channel::mpsc::TrySendError<_>>(());
                     }
                 }
             }
